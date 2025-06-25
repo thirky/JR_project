@@ -1,0 +1,602 @@
+[Gateway]
+  Gwid = "MA440604008V10A"
+  Name = "移动佛山禅城石湾黎涌七楼机房接入A"
+  Model = "GW200F"
+  SN = ""
+  Date = ""
+  HwVer = "1.3"
+  SwVer = "V1.0.34 20250307"
+
+[NTP]
+  Server = "cn.ntp.org.cn"
+  Interval = 24
+
+[LTE]
+  Enable = 1
+  ApnName = ""
+  ApnUser = ""
+  ApnPwd = ""
+
+[RemoteDebug]
+  Enable = 1
+  GwId = ""
+  SvrIP = ""
+  SvrPort = 0
+  Key = ""
+  User = ""
+  Passwd = ""
+  Describe = ""
+
+[[Device]]
+  ID = 1
+  Name = "总进线计量"
+  ModelID = "11006"
+  Port = "COM1"
+  ComID = 1
+  Addr = "1"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 2
+  Name = "电源1计量"
+  ModelID = "11006"
+  Port = "COM1"
+  ComID = 1
+  Addr = "2"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 3
+  Name = "电源2计量"
+  ModelID = "11006"
+  Port = "COM1"
+  ComID = 1
+  Addr = "3"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 6
+  Name = "美的红外空调"
+  ModelID = "11100"
+  Port = "COM3"
+  ComID = 3
+  Addr = "100"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 10
+
+[[Device]]
+  ID = 7
+  Name = "格力精密空调"
+  ModelID = "11101"
+  Port = "COM4"
+  ComID = 4
+  Addr = "4"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 10
+
+[[Device]]
+  ID = 8
+  Name = "中兴电源(5.0)"
+  ModelID = "11202"
+  Port = "COM8"
+  ComID = 8
+  Addr = "1"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 10
+
+[[Device]]
+  ID = 9
+  Name = "空调节能控制器"
+  ModelID = "11000"
+  Port = "VT1"
+  ComID = 80
+  Addr = "1"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 10
+  Name = "电池节能控制器"
+  ModelID = "11001"
+  Port = "VT1"
+  ComID = 80
+  Addr = "1"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 20
+  Name = "储能电池1"
+  ModelID = "11021"
+  Port = "COM5"
+  ComID = 5
+  Addr = "2"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 21
+  Name = "储能电池2"
+  ModelID = "11021"
+  Port = "COM5"
+  ComID = 5
+  Addr = "3"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 22
+  Name = "储能电池3"
+  ModelID = "11021"
+  Port = "COM5"
+  ComID = 5
+  Addr = "4"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 23
+  Name = "储能电池4"
+  ModelID = "11021"
+  Port = "COM5"
+  ComID = 5
+  Addr = "5"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 24
+  Name = "储能电池5"
+  ModelID = "11021"
+  Port = "COM5"
+  ComID = 5
+  Addr = "6"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 25
+  Name = "储能电池6"
+  ModelID = "11021"
+  Port = "COM5"
+  ComID = 5
+  Addr = "7"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 26
+  Name = "储能电池7"
+  ModelID = "11021"
+  Port = "COM5"
+  ComID = 5
+  Addr = "8"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 40
+  Name = "备用电池1"
+  ModelID = "11020"
+  Port = "COM6"
+  ComID = 6
+  Addr = "2"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 10
+
+[[Device]]
+  ID = 41
+  Name = "备用电池2"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "3"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 42
+  Name = "备用电池3"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "4"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 43
+  Name = "备用电池4"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "5"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 44
+  Name = "备用电池5"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "6"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 45
+  Name = "备用电池6"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "7"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 46
+  Name = "备用电池7"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "8"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 47
+  Name = "备用电池8"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "9"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 48
+  Name = "备用电池9"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "10"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 30
+
+[[Device]]
+  ID = 49
+  Name = "备用电池10"
+  ModelID = "11021"
+  Port = "COM6"
+  ComID = 6
+  Addr = "11"
+  Interval = 1000
+  Timeout = 1000
+  Offline = 10
+
+[[Collect]]
+  ID = "COM1"
+  Mode = 1
+  Type = "COM"
+  Resend = 0
+  SwInterval = 0
+  [Collect.Param]
+    BaudRate = 2400
+    DataBits = 8
+    StopBits = 1
+    Parity = "E"
+    Timeout = 60
+
+[[Collect]]
+  ID = "COM2"
+  Mode = 1
+  Type = "COM"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 60
+
+[[Collect]]
+  ID = "COM3"
+  Mode = 1
+  Type = "COM"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 60
+
+[[Collect]]
+  ID = "COM4"
+  Mode = 1
+  Type = "COM"
+  Resend = 0
+  SwInterval = 0
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 40
+
+[[Collect]]
+  ID = "COM5"
+  Mode = 1
+  Type = "COM"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 40
+
+[[Collect]]
+  ID = "COM6"
+  Mode = 1
+  Type = "COM"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 40
+
+[[Collect]]
+  ID = "COM7"
+  Mode = 1
+  Type = "COM"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 40
+
+[[Collect]]
+  ID = "COM8"
+  Mode = 1
+  Type = "COM"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 40
+
+[[Collect]]
+  ID = "COM9"
+  Mode = 1
+  Type = "COM"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    BaudRate = 9600
+    DataBits = 8
+    StopBits = 1
+    Parity = "N"
+    Timeout = 40
+
+[[Collect]]
+  ID = "VT1"
+  Mode = 1
+  Type = "VT"
+  Resend = 2
+  SwInterval = 20
+  [Collect.Param]
+    Timeout = 1000
+
+[[Forward]]
+  ID = "FW1"
+  Name = "JR"
+  Protocol = "MqttDF"
+  Enable = 1
+  Certificate = "mcloud.pem"
+  [Forward.Params]
+    IP = "www.jrie.com.cn"
+    Port = 1883
+    User = "admin"
+    Password = "admin123"
+    Appid = "jinrong"
+    Prjcode = "MA440604008V10A"
+    Prjname = "移动佛山禅城石湾黎涌七楼机房接入A"
+    Stationid = "440606841693"
+    Interval = 60
+    History = 100
+    IpAddr = "120.79.38.76"
+
+[[FwdDevs]]
+  Channel = "FW1"
+
+  [[FwdDevs.Device]]
+    DevId = 1
+    Name = "总进线计量"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 2
+    Name = "电源1计量"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 3
+    Name = "电源2计量"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 6
+    Name = "美的红外空调"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 7
+    Name = "格力精密空调"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 8
+    Name = "中兴电源(5.0)"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 9
+    Name = "空调节能控制器"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 10
+    Name = "电池节能控制器"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 20
+    Name = "储能电池1"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 21
+    Name = "储能电池2"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 22
+    Name = "储能电池3"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 23
+    Name = "储能电池4"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 24
+    Name = "储能电池5"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 25
+    Name = "储能电池6"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 26
+    Name = "储能电池7"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 40
+    Name = "备用电池1"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 41
+    Name = "备用电池2"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 42
+    Name = "备用电池3"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 43
+    Name = "备用电池4"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 44
+    Name = "备用电池5"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 45
+    Name = "备用电池6"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 46
+    Name = "备用电池7"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 47
+    Name = "备用电池8"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 48
+    Name = "备用电池9"
+    Addr = 0
+
+  [[FwdDevs.Device]]
+    DevId = 49
+    Name = "备用电池10"
+    Addr = 0
+
+[EMS]
+  [EMS.Bat]
+    [EMS.Bat."ems/bat1"]
+      CtrlMode = 0
+      ModuleCtrl = 1
+      VFCc = 53.6
+      VBCc = 56.5
+      VFCd = 49.0
+      VBCd = 49.1
+      Vhigh = 57.5
+      Vlow = 46.0
+      BatCap = 400.0
+      CC = 10.0
+      RSOC = 10.0
+      MSOC = 50.0
+      TChgAuto = 0
+      TChgRetry = 20
+  [EMS.Air]
+    CtrlMode = 0
+    TsAir = 30
+    TpAir = 30
+    Tf1Air = 25
+    Tf2Air = 25
+    Tf3Air = 30
+    TvAir = 20

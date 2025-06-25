@@ -4,7 +4,7 @@
  # @Description: 必须要在网络正常条件下运行本程序
  #
 import sys
-sys.path.append(r'.\package')
+sys.path.append(r'.\adapters')
 from playwright.sync_api import sync_playwright
 import PageUtil
 import Excelutil
