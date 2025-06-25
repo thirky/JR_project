@@ -128,9 +128,10 @@ def AddGateway(page,site_id,site_name):
 def DownloadFiles(page,site_id,city,area=None):
     page.get_by_text("设备管理").click()
     page.get_by_role("link", name="数据源").click()
-    page.locator("section").get_by_text(city).wait_for()
-    page.get_by_role("treeitem", name=city).locator("span").first.click()
-    page.get_by_text(area).click()
+    if area != None:
+        page.locator("section").get_by_text(city).wait_for()
+        page.get_by_role("treeitem", name=city).locator("span").first.click()
+        page.get_by_role("group").get_by_text(area).click()
     for i in range(len(site_id)):
         temp="【"+site_id[i]
         page.get_by_text(temp).click()
@@ -144,23 +145,32 @@ def DownloadFiles(page,site_id,city,area=None):
         # 获取下载文件的原始文件名
         original_filename = download.suggested_filename
         # 目标目录（可以自定义）
-        target_directory = r".\docs\配置文件"
+        target_directory = r"D:\LenovoSoftstore\配置文件"
         # 拼接目标路径
-        target_path = os.path.join(target_directory, city, area, original_filename)
+        if area == None:
+            target_path = os.path.join(target_directory, city, original_filename)
+        else:
+            target_path = os.path.join(target_directory, city, area, original_filename)
         # 将文件移动到目标目录
         shutil.move(temp_path, target_path)
         print(f"文件已保存到: {target_path}")
 
 #上传配置文件
-def UploadFiles(page,site_id):
+def UploadFiles(page,site_id,city,area=None):
     page.get_by_text("设备管理").click()
     page.get_by_role("link", name="数据源").click()
-    page.get_by_text("深圳市(36站)").wait_for()
-    page.get_by_text("深圳市(36站)").click()
+    if area != None:
+        page.locator("section").get_by_text(city).wait_for()
+        page.get_by_role("treeitem", name=city).locator("span").first.click()
+        page.get_by_role("group").get_by_text(area).click()
     for i in range(len(site_id)):
         temp="【"+site_id[i]
         file_name=site_id[i]+".xls"
-        target_path = os.path.join(r".\docs\配置文件", file_name)
+        target_directory = r"D:\LenovoSoftstore\配置文件"
+        if area == None:
+            target_path = os.path.join(target_directory, city, file_name)
+        else:
+            target_path = os.path.join(target_directory, city, area, file_name)
         page.get_by_text(temp).click()
         #双弹窗，等“导入成功”弹窗消失
         time.sleep(5)
@@ -252,4 +262,30 @@ def yex(page,site_name,bat_num):
         page.get_by_role("treeitem", name="总进线").locator("span").first.click(button="right")
         page.get_by_role("listitem").filter(has_text="编辑").click()
         page.get_by_role("spinbutton", name="请输入PACK数").fill(str(bat_num[i]))
+        page.get_by_role("button", name="保存").click()
+
+#平台站点添加(系统设置——站点管理——新增站点)
+def AddSite(page,site_name,site_addr,site_lon,site_lat,city,area):
+    page.get_by_text("系统设置").click()
+    page.get_by_role("link", name="站点管理").click()
+    for i in range(len(site_name)):
+        if site_name[i] == site_name[i + 1] and i < len(site_name) - 2:
+            continue
+        page.get_by_role("button", name="新增站点").click()
+        page.locator("form div").filter(has_text="站点名称").get_by_role("textbox").first.fill(site_name[i])
+        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").first.click()
+        page.get_by_role("listitem").filter(has_text="广东省").click()
+        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(1).click()
+        page.get_by_role("listitem").filter(has_text=city).click()
+        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(2).click()
+        page.get_by_role("listitem").filter(has_text=area[i]).click()
+        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(3).click()
+        page.get_by_role("listitem").filter(has_text="广东津荣-深圳供电局-深圳铁塔").click()
+        page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").first.fill(site_addr)
+        page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").nth(1).fill(site_lon)
+        page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").nth(2).fill(site_lat)
+        page.get_by_role("button", name="选择").click()
+        page.get_by_role("row", name="站点大屏 选择").get_by_role("button").click()
+        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(4).click()
+        page.get_by_role("listitem").filter(has_text="admin").click()
         page.get_by_role("button", name="保存").click()

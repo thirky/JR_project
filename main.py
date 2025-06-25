@@ -9,18 +9,16 @@ from playwright.sync_api import sync_playwright
 import PageUtil
 import Excelutil
 with sync_playwright() as playwright:
-    (site_id,site_name,site_region,bat_num)=Excelutil.getSiteIdandName(r".\docs\站点清单.xlsx",'禅城站点')
+    (site_id,site_name,site_region)=Excelutil.getSiteIdandRegion(r".\docs\站点表.xlsx",'深圳市')
     #headless=False
-    browser = playwright.chromium.launch(channel="msedge")
+    browser = playwright.chromium.launch(channel="msedge",headless=False)
     context = browser.new_context()
     page = context.new_page()
     page.goto("http://www.jrie.com.cn/")
-    account="lsenergy"
-    password="123456"
+    PageUtil.Login(page,account="admin",password="jinrong1101") 
     group_name="电源用电量曲线(禅城)"
     data_name="有功总电能"
-    PageUtil.Login(page,account,password)
-    PageUtil.ArrangeEP(page,site_id,site_name,group_name,data_name)
+    PageUtil.UploadFiles(page,site_id,"深圳市",area=None)
 
     # ---------------------
     context.close()
