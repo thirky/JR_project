@@ -1,80 +1,69 @@
 #
  # @Date: 2025-02-27 12:16:30
  # @Author: thirky
- # @Description: EXCEL工具类
+ # @Description: EXCEL工具类,注意openpyxl行和列都从1开始计数不是从0开始计数
  #
 
 import openpyxl
 import os
+from typing import Dict, List, Union
 
+class ExcelUtil:
+    """Excel工具类,提供读取Excel文件和处理站点表的功能"""
+    DEFAULT_PLATFORMPAGEFORM_PATH = r'.\docs\平台页面站点表.xlsx'
+    DEFAULT_JFB_PATH = r'.\docs\佛山移动机房表.xlsx'
+    DEFAULT_SITEFORM_PATH = r'.\docs\站点表.xlsx'
 
-#获取站点表的消息，(用于系统设置-站点管理-新增站点)
-def getSiteForm(path,sheetName):
-    workbook = openpyxl.load_workbook(path)
-    sheet = workbook[sheetName]
-    site_name = []
-    site_addr=[]
-    site_lon=[]
-    site_lat=[]
-    for row in range(1,sheet.max_row+1):
-        cell_value=sheet[f'A{row}'].value
-        if cell_value:
-            str(cell_value).strip()
-    for row in range(2, sheet.max_row + 1):
-        site_name.append(sheet[f'A{row}'].value)
-        site_addr.append(sheet[f'B{row}'].value)
-        site_lon.append(sheet[f'C{row}'].value)
-        site_lat.append(sheet[f'D{row}'].value)
-    return site_name,site_addr,site_lon,site_lat
+    @staticmethod
+    def _load_sheet(path: str, sheet_name: str) -> openpyxl.worksheet.worksheet.Worksheet:
+        """加载Excel sheet并校验路径和sheet名称"""
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Excel文件不存在: {path}")
+        workbook = openpyxl.load_workbook(path)
+        if sheet_name not in workbook.sheetnames:
+            raise ValueError(f"Sheet '{sheet_name}' 不存在")
+        return workbook[sheet_name]
+    
+    @classmethod
+    def get_site_form(cls, sheet_name: str) -> Dict[str, List[Union[str, float]]]:
+        """获取机房表数据(用于平台系统设置-站点管理-新增站点；返回:名称,地址,经度,纬度)"""
+        sheet = ExcelUtil._load_sheet(cls.DEFAULT_JFB_PATH, sheet_name)
+        return {
+            "site_name": [sheet[f'A{row}'].value for row in range(2, sheet.max_row + 1)],
+            "site_addr": [sheet[f'B{row}'].value for row in range(2, sheet.max_row + 1)],
+            "site_lon": [float(sheet[f'C{row}'].value) for row in range(2, sheet.max_row + 1)],
+            "site_lat": [float(sheet[f'D{row}'].value) for row in range(2, sheet.max_row + 1)],
+        }
 
-#获取excel表格里的站点id和名字
-def getSiteIdandRegion(path,sheetName):
-    workbook = openpyxl.load_workbook(path)
-    sheet = workbook[sheetName]
-    site_id = []
-    site_name=[]
-    site_region=[]
-    for row in range(1,sheet.max_row+1):
-        cell_value=sheet[f'A{row}'].value
-        if cell_value:
-            str(cell_value).strip()
-    for row in range(2, sheet.max_row + 1):
-        site_id.append(sheet[f'A{row}'].value)
-        site_name.append(sheet[f'B{row}'].value)
-        site_region.append(sheet[f'C{row}'].value)
-    return site_id,site_name,site_region
+    @classmethod
+    def getSiteIdandRegion(cls,sheet_name)-> Dict[str, List[Union[str, float]]]:
+        """获取站点ID和区域"""
+        sheet = ExcelUtil._load_sheet(cls.DEFAULT_SITEFORM_PATH, sheet_name)
+        return {
+            "site_id": [sheet[f'A{row}'].value for row in range(2, sheet.max_row + 1)],
+            "site_name": [sheet[f'B{row}'].value for row in range(2, sheet.max_row + 1)],
+            "site_region": [sheet[f'C{row}'].value for row in range(2, sheet.max_row + 1)],
+        }
 
-#实时监控站点信息表数据
-def getPoint(path,sheetName):
-    workbook = openpyxl.load_workbook(path)
-    sheet = workbook[sheetName]
-    site_region=[]
-    site_name=[]
-    site_addr=[]
-    gw_aid=[]
-    all_id=[]
-    power_id=[]
-    powerA_mfg=[]
-    powerA_model=[]
-    air1_name=[]
-    air2_name=[]
-    acn_AH=[]
-    aby_AH=[]
-    old=[]
-    for cell in sheet[1]:
-        if cell.value:
-            old.append(cell.value.strip())
-    for row in range(2, sheet.max_row + 1):
-        site_region.append(sheet[f'A{row}'].value)
-        site_name.append(sheet[f'B{row}'].value)
-        site_addr.append(sheet[f'C{row}'].value)
-        all_id.append(sheet[f'D{row}'].value)
-        power_id.append(sheet[f'E{row}'].value)
-        air1_name.append(sheet[f'F{row}'].value)
-        air2_name.append(sheet[f'G{row}'].value)
-        gw_aid.append(sheet[f'H{row}'].value)
-        powerA_mfg.append(sheet[f'I{row}'].value)
-        powerA_model.append(sheet[f'J{row}'].value)
-        acn_AH.append(sheet[f'K{row}'].value)
-        aby_AH.append(sheet[f'L{row}'].value)
-    return old,site_region,site_name,site_addr,all_id,power_id,air1_name,air2_name,gw_aid,powerA_mfg,powerA_model,acn_AH,aby_AH
+    @classmethod
+    def get_PlatformPage_form(cls,sheet_name: str)-> Dict[str, List[Union[str, float]]]:
+        """获取平台页面站点表数据（返回结构化字典）"""
+        sheet = ExcelUtil._load_sheet(cls.DEFAULT_PLATFORMPAGEFORM_PATH, sheet_name)
+        old = [cell.value.strip() for cell in sheet[1] if cell.value]       
+        # 从第2行开始提取数据（使用列表推导式）
+        data = {
+            "site_region": [sheet[f'A{row}'].value for row in range(2, sheet.max_row + 1)],
+            "site_name": [sheet[f'B{row}'].value for row in range(2, sheet.max_row + 1)],
+            "site_addr": [sheet[f'C{row}'].value for row in range(2, sheet.max_row + 1)],
+            "all_id": [sheet[f'D{row}'].value for row in range(2, sheet.max_row + 1)],
+            "power_id": [sheet[f'E{row}'].value for row in range(2, sheet.max_row + 1)],
+            "air1_name": [sheet[f'F{row}'].value for row in range(2, sheet.max_row + 1)],
+            "air2_name": [sheet[f'G{row}'].value for row in range(2, sheet.max_row + 1)],
+            "gw_aid": [sheet[f'H{row}'].value for row in range(2, sheet.max_row + 1)],
+            "powerA_mfg": [sheet[f'I{row}'].value for row in range(2, sheet.max_row + 1)],
+            "powerA_model": [sheet[f'J{row}'].value for row in range(2, sheet.max_row + 1)],
+            "acn_AH": [sheet[f'K{row}'].value for row in range(2, sheet.max_row + 1)],
+            "aby_AH": [sheet[f'L{row}'].value for row in range(2, sheet.max_row + 1)],
+            "old": old  # 保留原始标题行数据
+        }
+        return data

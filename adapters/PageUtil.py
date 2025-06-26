@@ -1,3 +1,8 @@
+#
+ # @Date: 2025-06-26 16:37:46
+ # @Author: thirky
+ # @Description: 暂时弃用
+ #
 import os
 import re
 import shutil
@@ -264,28 +269,28 @@ def yex(page,site_name,bat_num):
         page.get_by_role("spinbutton", name="请输入PACK数").fill(str(bat_num[i]))
         page.get_by_role("button", name="保存").click()
 
-#平台站点添加(系统设置——站点管理——新增站点)
-def AddSite(page,site_name,site_addr,site_lon,site_lat,city,area):
-    page.get_by_text("系统设置").click()
-    page.get_by_role("link", name="站点管理").click()
-    for i in range(len(site_name)):
-        if site_name[i] == site_name[i + 1] and i < len(site_name) - 2:
-            continue
-        page.get_by_role("button", name="新增站点").click()
-        page.locator("form div").filter(has_text="站点名称").get_by_role("textbox").first.fill(site_name[i])
-        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").first.click()
-        page.get_by_role("listitem").filter(has_text="广东省").click()
-        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(1).click()
-        page.get_by_role("listitem").filter(has_text=city).click()
-        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(2).click()
-        page.get_by_role("listitem").filter(has_text=area[i]).click()
-        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(3).click()
-        page.get_by_role("listitem").filter(has_text="广东津荣-深圳供电局-深圳铁塔").click()
-        page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").first.fill(site_addr)
-        page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").nth(1).fill(site_lon)
-        page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").nth(2).fill(site_lat)
-        page.get_by_role("button", name="选择").click()
-        page.get_by_role("row", name="站点大屏 选择").get_by_role("button").click()
-        page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(4).click()
-        page.get_by_role("listitem").filter(has_text="admin").click()
-        page.get_by_role("button", name="保存").click()
+    #平台站点添加(系统设置——站点管理——新增站点)
+    def AddSite(self,page,site_name,site_addr,site_lon,site_lat,city,area):
+        page.get_by_text("系统设置").click()
+        page.get_by_role("link", name="站点管理").click()
+        for i in range(len(site_name)):
+            if site_name[i] == site_name[i + 1] and i < len(site_name) - 2:
+                continue
+            page.get_by_role("button", name="新增站点").click()
+            page.locator("form div").filter(has_text="站点名称").get_by_role("textbox").first.fill(site_name[i])
+            page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").first.click()
+            page.get_by_role("listitem").filter(has_text="广东省").click()
+            page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(1).click()
+            page.get_by_role("listitem").filter(has_text=city).click()
+            page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(2).click()
+            page.get_by_role("listitem").filter(has_text=area[i]).click()
+            page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(3).click()
+            page.get_by_role("listitem").filter(has_text="广东津荣-深圳供电局-深圳铁塔").click()
+            page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").first.fill(site_addr)
+            page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").nth(1).fill(site_lon)
+            page.locator("div").filter(has_text=re.compile(r"^详细地址经度纬度$")).get_by_role("textbox").nth(2).fill(site_lat)
+            page.get_by_role("button", name="选择").click()
+            page.get_by_role("row", name="站点大屏 选择").get_by_role("button").click()
+            page.get_by_role("dialog", name="站点信息").get_by_placeholder("请选择").nth(4).click()
+            page.get_by_role("listitem").filter(has_text="admin").click()
+            page.get_by_role("button", name="保存").click()

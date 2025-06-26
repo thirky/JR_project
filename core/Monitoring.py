@@ -3,10 +3,25 @@
  # @Author: thirky
  # @Description: 
  #
+import sys
+sys.path.append(r'.\adapters')
+from ExcelUtil import ExcelUtil
 import os
-import Excelutil
 
-(old,site_region,site_name,site_addr,all_id,power_id,air1_name,air2_name,gw_aid,powerA_mfg,powerA_model,acn_AH,aby_AH)=Excelutil.getPoint(r"C:\Users\26485\Desktop\平台页面站点表.xlsx","Sheet1")
+site_data= ExcelUtil.get_PlatformPage_form('Sheet1')
+site_region=site_data['site_region']
+site_name=site_data['site_name']
+site_addr=site_data['site_addr']
+all_id=site_data['all_id']
+power_id=site_data['power_id']
+air1_name=site_data['air1_name']
+air2_name=site_data['air2_name']
+gw_aid=site_data['gw_aid']
+powerA_mfg=site_data['powerA_mfg']
+powerA_model=site_data['powerA_model']
+acn_AH=site_data['acn_AH']
+aby_AH=site_data['aby_AH']
+old=site_data['old']
 base_dir=r"C:\Users\26485\Desktop\站点大屏模板.txt"
 
 for i in range(len(site_name)):
