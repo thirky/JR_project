@@ -10,16 +10,17 @@ from typing import Dict, List, Union
 
 class ExcelUtil:
     """Excel工具类,提供读取Excel文件和处理站点表的功能"""
-    DEFAULT_PLATFORMPAGEFORM_PATH = r'.\docs\平台页面站点表.xlsx'
-    DEFAULT_JFB_PATH = r'.\docs\佛山移动机房表.xlsx'
-    DEFAULT_SITEFORM_PATH = r'.\docs\站点表.xlsx'
+    PLATFORMPAGEFORM_PATH = r'.\docs\平台页面站点表.xlsx'
+    JFB_PATH = r'.\docs\佛山移动机房表.xlsx'
+    SITEFORM_PATH = r'.\docs\站点表.xlsx'
+    TOML_PATH = r'.\docs\本地网关配置生成表.xlsx'
 
     @staticmethod
     def _load_sheet(path: str, sheet_name: str) -> openpyxl.worksheet.worksheet.Worksheet:
         """加载Excel sheet并校验路径和sheet名称"""
         if not os.path.exists(path):
             raise FileNotFoundError(f"Excel文件不存在: {path}")
-        workbook = openpyxl.load_workbook(path)
+        workbook = openpyxl.load_workbook(path,data_only=True)
         if sheet_name not in workbook.sheetnames:
             raise ValueError(f"Sheet '{sheet_name}' 不存在")
         return workbook[sheet_name]
@@ -27,7 +28,7 @@ class ExcelUtil:
     @classmethod
     def get_site_form(cls, sheet_name: str) -> Dict[str, List[Union[str, float]]]:
         """获取机房表数据(用于平台系统设置-站点管理-新增站点；返回:名称,地址,经度,纬度)"""
-        sheet = ExcelUtil._load_sheet(cls.DEFAULT_JFB_PATH, sheet_name)
+        sheet = ExcelUtil._load_sheet(cls.JFB_PATH, sheet_name)
         return {
             "site_name": [sheet[f'A{row}'].value for row in range(2, sheet.max_row + 1)],
             "site_addr": [sheet[f'B{row}'].value for row in range(2, sheet.max_row + 1)],
@@ -38,7 +39,7 @@ class ExcelUtil:
     @classmethod
     def getSiteIdandRegion(cls,sheet_name)-> Dict[str, List[Union[str, float]]]:
         """获取站点ID和区域"""
-        sheet = ExcelUtil._load_sheet(cls.DEFAULT_SITEFORM_PATH, sheet_name)
+        sheet = ExcelUtil._load_sheet(cls.SITEFORM_PATH, sheet_name)
         return {
             "site_id": [sheet[f'A{row}'].value for row in range(2, sheet.max_row + 1)],
             "site_name": [sheet[f'B{row}'].value for row in range(2, sheet.max_row + 1)],
@@ -48,7 +49,7 @@ class ExcelUtil:
     @classmethod
     def get_PlatformPage_form(cls,sheet_name: str)-> Dict[str, List[Union[str, float]]]:
         """获取平台页面站点表数据（返回结构化字典）"""
-        sheet = ExcelUtil._load_sheet(cls.DEFAULT_PLATFORMPAGEFORM_PATH, sheet_name)
+        sheet = ExcelUtil._load_sheet(cls.PLATFORMPAGEFORM_PATH, sheet_name)
         old = [cell.value.strip() for cell in sheet[1] if cell.value]       
         # 从第2行开始提取数据（使用列表推导式）
         data = {
@@ -67,3 +68,16 @@ class ExcelUtil:
             "old": old  # 保留原始标题行数据
         }
         return data
+
+    @classmethod
+    def read_excel_config(cls, sheet_name: str) -> List[dict]:
+        """读取Excel配置文件"""
+        sheet = ExcelUtil._load_sheet(cls.TOML_PATH, sheet_name)
+        headers = [cell.value for cell in sheet[1]]
+        
+        configs = []
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+            config = dict(zip(headers, row))
+            configs.append(config)
+        
+        return configs

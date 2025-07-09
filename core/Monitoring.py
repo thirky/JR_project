@@ -8,7 +8,7 @@ sys.path.append(r'.\adapters')
 from ExcelUtil import ExcelUtil
 import os
 
-site_data= ExcelUtil.get_PlatformPage_form('Sheet1')
+site_data= ExcelUtil.get_PlatformPage_form('Sheet2')
 site_region=site_data['site_region']
 site_name=site_data['site_name']
 site_addr=site_data['site_addr']
@@ -48,6 +48,6 @@ for i in range(len(site_name)):
     # 处理文件名中的非法字符
     safe_name = "".join(c for c in site_name[i] if c not in r'\/:*?"<>|')
     # 输出文件到指定文件夹
-    output_path = f"C:/Users/26485/Desktop/实时监控页面表/{safe_name}.txt"
+    output_path = f"C:/Users/26485/Desktop/实时监控页面表/{site_name}.txt"
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(content)

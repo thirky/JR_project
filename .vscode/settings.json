@@ -3,6 +3,7 @@
         "./package",
         "./adapters",
         "./adapters",
+        "./adapters",
         "./adapters"
     ]
 }
